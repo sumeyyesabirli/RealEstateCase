@@ -7,7 +7,7 @@ namespace RealEstateCase.Business.Futures.Queries.Product.GetAllProduct
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public decimal ProductPrice { get; set; }
+        public double ProductPrice { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
 
@@ -28,7 +28,7 @@ namespace RealEstateCase.Business.Futures.Queries.Product.GetAllProduct
         public int Garages { get; set; }
         public int Area { get; set; }
         public int Size { get; set; }
-        public decimal SaleOrRentPrice { get; set; }
+        public double SaleOrRentPrice { get; set; }
         public string BeforePriceLabel { get; set; }
         public string AfterPriceLabel { get; set; }
         public bool CenterCooling { get; set; }

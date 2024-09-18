@@ -22,6 +22,44 @@ namespace RealEstateCase.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("RealEstateCase.Entity.Main.AdvertisementStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdvertisementStatuses");
+                });
+
             modelBuilder.Entity("RealEstateCase.Entity.Main.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -106,6 +144,9 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AdvertisementStatusId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -122,14 +163,11 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
-
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("ProductPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("ProductPrice")
+                        .HasColumnType("float");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -145,6 +183,8 @@ namespace RealEstateCase.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdvertisementStatusId");
 
                     b.HasIndex("CategoryId");
 
@@ -265,8 +305,8 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SaleOrRentPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("SaleOrRentPrice")
+                        .HasColumnType("float");
 
                     b.Property<bool>("Sauna")
                         .HasColumnType("bit");
@@ -305,7 +345,8 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductId")
+                        .IsUnique();
 
                     b.ToTable("ProductDetails");
                 });
@@ -552,6 +593,12 @@ namespace RealEstateCase.DataAccess.Migrations
 
             modelBuilder.Entity("RealEstateCase.Entity.Main.Product", b =>
                 {
+                    b.HasOne("RealEstateCase.Entity.Main.AdvertisementStatus", "AdvertisementStatus")
+                        .WithMany()
+                        .HasForeignKey("AdvertisementStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RealEstateCase.Entity.Main.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
@@ -564,6 +611,8 @@ namespace RealEstateCase.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("AdvertisementStatus");
+
                     b.Navigation("Category");
 
                     b.Navigation("User");
@@ -572,8 +621,8 @@ namespace RealEstateCase.DataAccess.Migrations
             modelBuilder.Entity("RealEstateCase.Entity.Main.ProductDetails", b =>
                 {
                     b.HasOne("RealEstateCase.Entity.Main.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
+                        .WithOne("ProductDetails")
+                        .HasForeignKey("RealEstateCase.Entity.Main.ProductDetails", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -635,6 +684,9 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Navigation("Favorites");
 
                     b.Navigation("Images");
+
+                    b.Navigation("ProductDetails")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RealEstateCase.Entity.Main.ProductDetails", b =>

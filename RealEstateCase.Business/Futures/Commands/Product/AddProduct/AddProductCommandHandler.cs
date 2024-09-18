@@ -3,6 +3,7 @@ using MediatR;
 using RealEstateCase.Core.ResponseManager;
 using RealEstateCase.DataAccess.Repositories.Abstract;
 using RealEstateCase.DataAccess.UnitOfWork.Abstract;
+using RealEstateCase.Entity.Enums;
 using RealEstateCase.Entity.Main;
 
 namespace RealEstateCase.Business.Futures.Commands.Product.AddProduct
@@ -21,6 +22,7 @@ namespace RealEstateCase.Business.Futures.Commands.Product.AddProduct
         public async Task<BaseResponseModel<bool>> Handle(AddProductCommandRequestModel request, CancellationToken cancellationToken)
         {
             var productEntity = _mapper.Map<Entity.Main.Product>(request);
+            productEntity.AdvertisementStatusId = (int)AdvertisementStatusEnum.Pending;
             _unitOfWork.OpenTransaction();
             _unitOfWork.Repository<IProductRepository>().Add(productEntity);
             var saveProductResult = await _unitOfWork.SaveChangesAsync(cancellationToken);

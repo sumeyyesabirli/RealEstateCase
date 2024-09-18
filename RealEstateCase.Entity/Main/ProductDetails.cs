@@ -19,7 +19,7 @@ namespace RealEstateCase.Entity.Main
         public int Area { get; set; }
         public int Size { get; set; }
 
-        public decimal SaleOrRentPrice { get; set; }
+        public double SaleOrRentPrice { get; set; }
         public string BeforePriceLabel { get; set; }
         public string AfterPriceLabel { get; set; }
 

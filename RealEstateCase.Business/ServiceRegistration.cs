@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using RealEstateCase.Business.Futures.Commands.Product.AddProduct;
+using RealEstateCase.Business.Futures.Setup;
 using System.Reflection;
 
 namespace RealEstateCase.Business
@@ -16,6 +17,11 @@ namespace RealEstateCase.Business
             {
                 cfg.RegisterValidatorsFromAssemblyContaining<Validation>();
             });
+            service.AddScoped<CreateDataService>();
+            var createDataService = service.BuildServiceProvider().GetService<CreateDataService>();
+            createDataService.CreateAdvertisementStatus().GetAwaiter().GetResult();
+            createDataService.CreateCategories().GetAwaiter().GetResult();
         }
+
     }
 }

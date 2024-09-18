@@ -14,7 +14,8 @@ namespace RealEstateCase.DataAccess.Contexts
 
         public RealEstateCaseDbContext(DbContextOptions<RealEstateCaseDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
-            _httpContextAccessor = httpContextAccessor;       
+            _httpContextAccessor = httpContextAccessor;
+            Database.Migrate();
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -26,9 +27,10 @@ namespace RealEstateCase.DataAccess.Contexts
         public DbSet<ProductDetails> ProductDetails { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
-
+        public DbSet<AdvertisementStatus> AdvertisementStatuses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {            
+        {
+            
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.User)
                 .WithMany(u => u.Favorites)
@@ -40,7 +42,7 @@ namespace RealEstateCase.DataAccess.Contexts
                 .WithMany(p => p.Favorites)
                 .HasForeignKey(f => f.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
-
+          
             modelBuilder.Entity<UserRole>().HasKey(p => new { p.UserId, p.RoleId, p.Id });
             modelBuilder.Entity<UserRole>().Property(p => p.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<User>(entity =>

@@ -31,16 +31,10 @@ namespace RealEstateCase.Api.Controllers
             return HandleResponse(await _mediator.Send(requestModel, cancellationToken));
         }
 
-        [HttpPut("api/Product/Approve/{id}")]
-        public async Task<IActionResult> ApproveProduct(int id, CancellationToken cancellationToken)
-        {
-            var requestModel = new ApprovePropertyCommandRequestModel
-            {
-                ProductId = id
-            };
+        [HttpPut("api/Product/SetAdvertisementStatus")]
+        public async Task<IActionResult> ApproveProduct([FromBody] SetAdvertisementStatusCommandRequestModel requestModel, CancellationToken cancellationToken)
+            => HandleResponse(await _mediator.Send(requestModel, cancellationToken));
 
-            return HandleResponse(await _mediator.Send(requestModel, cancellationToken));
-        }
 
     }
 }

@@ -6,11 +6,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RealEstateCase.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initialMigration : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AdvertisementStatuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true),
+                    UpdatedById = table.Column<int>(type: "int", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdvertisementStatuses", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -79,8 +99,8 @@ namespace RealEstateCase.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    ProductPrice = table.Column<double>(type: "float", nullable: false),
+                    AdvertisementStatusId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -93,6 +113,12 @@ namespace RealEstateCase.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_AdvertisementStatuses_AdvertisementStatusId",
+                        column: x => x.AdvertisementStatusId,
+                        principalTable: "AdvertisementStatuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -218,7 +244,7 @@ namespace RealEstateCase.DataAccess.Migrations
                     Garages = table.Column<int>(type: "int", nullable: false),
                     Area = table.Column<int>(type: "int", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: false),
-                    SaleOrRentPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SaleOrRentPrice = table.Column<double>(type: "float", nullable: false),
                     BeforePriceLabel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AfterPriceLabel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CenterCooling = table.Column<bool>(type: "bit", nullable: false),
@@ -307,7 +333,8 @@ namespace RealEstateCase.DataAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ProductDetails_ProductId",
                 table: "ProductDetails",
-                column: "ProductId");
+                column: "ProductId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ProductDetailsId",
@@ -318,6 +345,11 @@ namespace RealEstateCase.DataAccess.Migrations
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_AdvertisementStatusId",
+                table: "Products",
+                column: "AdvertisementStatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -363,6 +395,9 @@ namespace RealEstateCase.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "AdvertisementStatuses");
 
             migrationBuilder.DropTable(
                 name: "Categories");

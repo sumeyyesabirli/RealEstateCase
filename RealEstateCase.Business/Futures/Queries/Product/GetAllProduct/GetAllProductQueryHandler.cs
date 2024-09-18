@@ -22,7 +22,7 @@ namespace RealEstateCase.Business.Futures.Queries.Product.GetAllProduct
 
         public async Task<BaseResponseModel<IEnumerable<GetAllProductQueryResponseModel>>> Handle(GetAllProductQueryRequestModel request, CancellationToken cancellationToken)
         {
-            var data = await _unitOfWork.Repository<IProductRepository>().Query().Include(x => x.ProductDetails).ToListAsync(cancellationToken);
+            var data = await _unitOfWork.Repository<IProductRepository>().Query().Where(x=> x.AdvertisementStatusId == (int)request.Status).Include(x => x.ProductDetails).ToListAsync(cancellationToken);
             var mappedData = _mapper.Map<List<GetAllProductQueryResponseModel>>(data);
          /*   var query = (from product in _unitOfWork.Repository<IProductRepository>().Query()
                          join details in _unitOfWork.Repository<IProductDetailsRepository>().Query()

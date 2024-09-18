@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateCase.Core.Helper
 {
     public static class ClaimHelper
     {
+
         public static bool IsAuthenticated(this IHttpContextAccessor httpContextAccessor)
         {
             var identity = GetClaimsPrincipal(httpContextAccessor).Identity;
@@ -21,9 +17,25 @@ namespace RealEstateCase.Core.Helper
             return httpContextAccessor?.HttpContext?.User;
         }
 
-        public static int GetUserId(this IHttpContextAccessor httpContextAccessor)
+        public static int? GetUserId(this IHttpContextAccessor httpContextAccessor)
         {
-            return IsAuthenticated(httpContextAccessor) ? Convert.ToInt32(GetClaimsPrincipal(httpContextAccessor).Claims.First(i => i.Type == "userId")?.Value) : 0;
+            try
+            {
+                var userClaims = GetClaimsPrincipal(httpContextAccessor);
+
+                var userIdClaim = userClaims?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (string.IsNullOrEmpty(userIdClaim))
+                {
+                    throw new InvalidOperationException("User ID claim not found.");
+                }
+
+                return int.Parse(userIdClaim);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

@@ -10,5 +10,6 @@ namespace RealEstateCase.Entity.Main
         public string Email { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
+        public ICollection<Product> Products { get; set; }  // Bir kullanıcı birden fazla ürün ekleyebilir.
     }
 }

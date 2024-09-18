@@ -34,7 +34,7 @@ namespace RealEstateCase.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -65,7 +65,7 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -86,17 +86,12 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserDetailId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("UserDetailId");
 
                     b.HasIndex("UserId");
 
@@ -114,7 +109,7 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -127,17 +122,14 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProductDetailsId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -149,19 +141,12 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserDetailId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ProductDetailsId");
-
-                    b.HasIndex("UserDetailId");
 
                     b.HasIndex("UserId");
 
@@ -214,7 +199,7 @@ namespace RealEstateCase.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -277,9 +262,8 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool>("Pool")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PropertyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("SaleOrRentPrice")
                         .HasColumnType("decimal(18,2)");
@@ -315,15 +299,13 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("VideoUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductDetails");
                 });
@@ -336,7 +318,7 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -381,7 +363,7 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -416,7 +398,8 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -463,7 +446,7 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -511,13 +494,19 @@ namespace RealEstateCase.DataAccess.Migrations
 
             modelBuilder.Entity("RealEstateCase.Entity.Main.UserRole", b =>
                 {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -529,23 +518,15 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UpdatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "RoleId", "Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserRole");
                 });
@@ -557,10 +538,6 @@ namespace RealEstateCase.DataAccess.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("RealEstateCase.Entity.Main.UserDetail", null)
-                        .WithMany("Favorites")
-                        .HasForeignKey("UserDetailId");
 
                     b.HasOne("RealEstateCase.Entity.Main.User", "User")
                         .WithMany("Favorites")
@@ -581,27 +558,26 @@ namespace RealEstateCase.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RealEstateCase.Entity.Main.ProductDetails", "ProductDetails")
-                        .WithMany()
-                        .HasForeignKey("ProductDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RealEstateCase.Entity.Main.UserDetail", null)
-                        .WithMany("Products")
-                        .HasForeignKey("UserDetailId");
-
                     b.HasOne("RealEstateCase.Entity.Main.User", "User")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
 
-                    b.Navigation("ProductDetails");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RealEstateCase.Entity.Main.ProductDetails", b =>
+                {
+                    b.HasOne("RealEstateCase.Entity.Main.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("RealEstateCase.Entity.Main.ProductImage", b =>
@@ -675,14 +651,9 @@ namespace RealEstateCase.DataAccess.Migrations
                 {
                     b.Navigation("Favorites");
 
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("RealEstateCase.Entity.Main.UserDetail", b =>
-                {
-                    b.Navigation("Favorites");
-
                     b.Navigation("Products");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,28 +1,36 @@
-﻿using RealEstateCase.Core.Entities;
-using System.Diagnostics.Contracts;
+﻿using RealEstateCase.Core.Enum;
 
-namespace RealEstateCase.Entity.Main
+namespace RealEstateCase.Business.Futures.Queries.Product.GetAllProduct
 {
-    public class ProductDetails : BaseEntity
+    public class GetAllProductQueryResponseModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int CategoryId { get; set; }
+        public int UserId { get; set; }
 
+        public ProductDetailsQueryResponseModel ProductDetails { get; set; }
+    }
+
+    public class ProductDetailsQueryResponseModel
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public string Type { get; set; }
         public string Status { get; set; }
         public string Location { get; set; }
-
         public int Bedrooms { get; set; }
         public int Bathrooms { get; set; }
         public int Floors { get; set; }
         public int Garages { get; set; }
         public int Area { get; set; }
         public int Size { get; set; }
-
         public decimal SaleOrRentPrice { get; set; }
         public string BeforePriceLabel { get; set; }
         public string AfterPriceLabel { get; set; }
-
         public bool CenterCooling { get; set; }
         public bool Balcony { get; set; }
         public bool PetFriendly { get; set; }
@@ -39,12 +47,6 @@ namespace RealEstateCase.Entity.Main
         public bool Elevator { get; set; }
         public bool DishWasher { get; set; }
         public bool EmergencyExit { get; set; }
-
-        public ICollection<ProductImage> Gallery { get; set; }
-
-        public int ProductId { get; set; }
-        public Product Product { get; set; }
-
         public string Address { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

@@ -11,11 +11,8 @@ namespace RealEstateCase.Entity.Main
         public string? Description { get; set; }
         public bool? Gender { get; set; } // 0 ise kadın 1 ise erkek
 
-        public int UserId { get; set; }      
+        public int UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
-
-        public ICollection<Favorite> Favorites { get; set; }
-        public virtual ICollection<Product>? Products { get; set; }
     }
 }

@@ -136,7 +136,7 @@ namespace RealEstateCase.DataAccess.UnitOfWork.Concrete
             {
                 _transaction?.Rollback();
 
-                return ResponseManager.BadRequest<int>(ex.Message);
+                return ResponseManager.BadRequest<int>("SqlException",new List<string> { ex.Message });
             }
         }
     }

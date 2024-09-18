@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateCase.Core.Entities
 {
@@ -15,7 +10,7 @@ namespace RealEstateCase.Core.Entities
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
         public int? UpdatedById { get; set; }
         [DefaultValue(true)]
         public bool IsActive { get; set; } = true;

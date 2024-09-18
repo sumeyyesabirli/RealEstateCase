@@ -6,10 +6,9 @@ namespace RealEstateCase.Entity.Main
     {
         public string Username { get; set; }
         public string PasswordHash { get; set; }
+        public string PasswordSalt { get; set; }
         public string Email { get; set; }
-        public string Role { get; set; }
-
-        public ICollection<Product> Products { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
     }
 }

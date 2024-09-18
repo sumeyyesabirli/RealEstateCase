@@ -13,8 +13,9 @@ namespace RealEstateCase.Entity.Main
 
         public int UserId { get; set; }      
         [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public User User { get; set; }
 
+        public ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<Product>? Products { get; set; }
     }
 }

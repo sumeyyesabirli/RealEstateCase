@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using RealEstateCase.DataAccess.Contexts;
+using RealEstateCase.DataAccess.UnitOfWork.Abstract;
+using RealEstateCase.DataAccess.UnitOfWork.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,7 @@ namespace RealEstateCase.DataAccess
             {
                 x.UseSqlServer(configuration.GetConnectionString("connectionString"));
             });
-           // service.TryAddScoped(typeof(IUnitOfWork), typeof(UnitOfWork<CafeMasterDbContext>));
+            service.TryAddScoped(typeof(IUnitOfWork), typeof(UnitOfWork<RealEstateCaseDbContext>));
             service.TryAddScoped<DbContext, RealEstateCaseDbContext>();
         }
     }

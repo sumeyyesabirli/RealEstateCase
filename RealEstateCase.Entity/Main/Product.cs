@@ -20,4 +20,4 @@ namespace RealEstateCase.Entity.Main
         public ProductDetails ProductDetails { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
     }
-}
+} 

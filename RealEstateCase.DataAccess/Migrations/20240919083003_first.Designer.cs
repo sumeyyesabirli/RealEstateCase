@@ -12,7 +12,7 @@ using RealEstateCase.DataAccess.Contexts;
 namespace RealEstateCase.DataAccess.Migrations
 {
     [DbContext(typeof(RealEstateCaseDbContext))]
-    [Migration("20240918205900_first")]
+    [Migration("20240919083003_first")]
     partial class first
     {
         /// <inheritdoc />
@@ -63,7 +63,7 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.ToTable("AdvertisementStatuses");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.Category", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.AdvertisementType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("AdvertisementTypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -118,7 +118,7 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UpdatedById")
@@ -132,14 +132,14 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("PropertyId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Favorites");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.Product", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.Property", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,7 +150,7 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<int>("AdvertisementStatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("AdvertisementTypeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreatedById")
@@ -169,7 +169,7 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<double>("ProductPrice")
+                    b.Property<double>("PropertyPrice")
                         .HasColumnType("float");
 
                     b.Property<string>("Title")
@@ -189,14 +189,14 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     b.HasIndex("AdvertisementStatusId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("AdvertisementTypeId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Propertys");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.ProductDetails", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.PropertyDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,41 +205,36 @@ namespace RealEstateCase.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AfterPriceLabel")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Area")
+                    b.Property<int?>("Area")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Balcony")
+                    b.Property<bool?>("Balcony")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Barbeque")
+                    b.Property<bool?>("Barbeque")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Bathrooms")
+                    b.Property<int?>("Bathrooms")
                         .HasColumnType("int");
 
-                    b.Property<int>("Bedrooms")
+                    b.Property<int?>("Bedrooms")
                         .HasColumnType("int");
 
                     b.Property<string>("BeforePriceLabel")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("CenterCooling")
+                    b.Property<bool?>("CenterCooling")
                         .HasColumnType("bit");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CreatedById")
@@ -249,34 +244,33 @@ namespace RealEstateCase.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("DishWasher")
+                    b.Property<bool?>("DishWasher")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Dryer")
+                    b.Property<bool?>("Dryer")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Elevator")
+                    b.Property<bool?>("Elevator")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("EmergencyExit")
+                    b.Property<bool?>("EmergencyExit")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("FireAlarm")
+                    b.Property<bool?>("FireAlarm")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Floors")
+                    b.Property<int?>("Floors")
                         .HasColumnType("int");
 
-                    b.Property<int>("Garages")
+                    b.Property<int?>("Garages")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Gym")
+                    b.Property<bool?>("Gym")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Heating")
+                    b.Property<bool?>("Heating")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsActive")
@@ -285,55 +279,49 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Laundry")
+                    b.Property<bool?>("Laundry")
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("ModernKitchen")
+                    b.Property<bool?>("ModernKitchen")
                         .HasColumnType("bit");
 
                     b.Property<string>("Neighborhood")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PetFriendly")
+                    b.Property<bool?>("PetFriendly")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Pool")
+                    b.Property<bool?>("Pool")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<double>("SaleOrRentPrice")
+                    b.Property<double?>("SaleOrRentPrice")
                         .HasColumnType("float");
 
-                    b.Property<bool>("Sauna")
+                    b.Property<bool?>("Sauna")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Size")
+                    b.Property<int?>("Size")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Storage")
+                    b.Property<bool?>("Storage")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UpdatedById")
@@ -343,18 +331,18 @@ namespace RealEstateCase.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId")
-                        .IsUnique();
+                    b.HasIndex("PropertyId")
+                        .IsUnique()
+                        .HasFilter("[PropertyId] IS NOT NULL");
 
-                    b.ToTable("ProductDetails");
+                    b.ToTable("PropertyDetails");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.ProductImage", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.PropertyImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -378,10 +366,10 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ProductDetailsId")
+                    b.Property<int?>("PropertyDetailsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UpdatedById")
@@ -392,11 +380,11 @@ namespace RealEstateCase.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductDetailsId");
+                    b.HasIndex("PropertyDetailsId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("PropertyId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("PropertyImages");
                 });
 
             modelBuilder.Entity("RealEstateCase.Entity.Main.Role", b =>
@@ -577,9 +565,9 @@ namespace RealEstateCase.DataAccess.Migrations
 
             modelBuilder.Entity("RealEstateCase.Entity.Main.Favorite", b =>
                 {
-                    b.HasOne("RealEstateCase.Entity.Main.Product", "Product")
+                    b.HasOne("RealEstateCase.Entity.Main.Property", "Property")
                         .WithMany("Favorites")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -589,12 +577,12 @@ namespace RealEstateCase.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Property");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.Product", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.Property", b =>
                 {
                     b.HasOne("RealEstateCase.Entity.Main.AdvertisementStatus", "AdvertisementStatus")
                         .WithMany()
@@ -602,49 +590,47 @@ namespace RealEstateCase.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RealEstateCase.Entity.Main.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
+                    b.HasOne("RealEstateCase.Entity.Main.AdvertisementType", "AdvertisementType")
+                        .WithMany("Propertys")
+                        .HasForeignKey("AdvertisementTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RealEstateCase.Entity.Main.User", "User")
-                        .WithMany("Products")
+                        .WithMany("Propertys")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AdvertisementStatus");
 
-                    b.Navigation("Category");
+                    b.Navigation("AdvertisementType");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.ProductDetails", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.PropertyDetails", b =>
                 {
-                    b.HasOne("RealEstateCase.Entity.Main.Product", "Product")
-                        .WithOne("ProductDetails")
-                        .HasForeignKey("RealEstateCase.Entity.Main.ProductDetails", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("RealEstateCase.Entity.Main.Property", "Property")
+                        .WithOne("PropertyDetails")
+                        .HasForeignKey("RealEstateCase.Entity.Main.PropertyDetails", "PropertyId");
 
-                    b.Navigation("Product");
+                    b.Navigation("Property");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.ProductImage", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.PropertyImage", b =>
                 {
-                    b.HasOne("RealEstateCase.Entity.Main.ProductDetails", null)
+                    b.HasOne("RealEstateCase.Entity.Main.PropertyDetails", null)
                         .WithMany("Gallery")
-                        .HasForeignKey("ProductDetailsId");
+                        .HasForeignKey("PropertyDetailsId");
 
-                    b.HasOne("RealEstateCase.Entity.Main.Product", "Product")
+                    b.HasOne("RealEstateCase.Entity.Main.Property", "Property")
                         .WithMany("Images")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Property");
                 });
 
             modelBuilder.Entity("RealEstateCase.Entity.Main.UserDetail", b =>
@@ -677,22 +663,22 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.Category", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.AdvertisementType", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Propertys");
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.Product", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.Property", b =>
                 {
                     b.Navigation("Favorites");
 
                     b.Navigation("Images");
 
-                    b.Navigation("ProductDetails")
+                    b.Navigation("PropertyDetails")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RealEstateCase.Entity.Main.ProductDetails", b =>
+            modelBuilder.Entity("RealEstateCase.Entity.Main.PropertyDetails", b =>
                 {
                     b.Navigation("Gallery");
                 });
@@ -706,7 +692,7 @@ namespace RealEstateCase.DataAccess.Migrations
                 {
                     b.Navigation("Favorites");
 
-                    b.Navigation("Products");
+                    b.Navigation("Propertys");
 
                     b.Navigation("UserRoles");
                 });

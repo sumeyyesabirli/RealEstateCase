@@ -37,7 +37,7 @@ namespace RealEstateCase.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdvertisementTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: true),
@@ -92,17 +92,17 @@ namespace RealEstateCase.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Propertys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductPrice = table.Column<double>(type: "float", nullable: false),
+                    PropertyPrice = table.Column<double>(type: "float", nullable: false),
                     AdvertisementStatusId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    AdvertisementTypeId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: true),
@@ -112,21 +112,21 @@ namespace RealEstateCase.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Propertys", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_AdvertisementStatuses_AdvertisementStatusId",
+                        name: "FK_Propertys_AdvertisementStatuses_AdvertisementStatusId",
                         column: x => x.AdvertisementStatusId,
                         principalTable: "AdvertisementStatuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_Propertys_Categories_AdvertisementTypeId",
+                        column: x => x.AdvertisementTypeId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Users_UserId",
+                        name: "FK_Propertys_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -202,7 +202,7 @@ namespace RealEstateCase.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    PropertyId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: true),
@@ -214,9 +214,9 @@ namespace RealEstateCase.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Favorites", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Favorites_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Favorites_Propertys_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Propertys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -228,48 +228,48 @@ namespace RealEstateCase.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductDetails",
+                name: "PropertyDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Bedrooms = table.Column<int>(type: "int", nullable: false),
-                    Bathrooms = table.Column<int>(type: "int", nullable: false),
-                    Floors = table.Column<int>(type: "int", nullable: false),
-                    Garages = table.Column<int>(type: "int", nullable: false),
-                    Area = table.Column<int>(type: "int", nullable: false),
-                    Size = table.Column<int>(type: "int", nullable: false),
-                    SaleOrRentPrice = table.Column<double>(type: "float", nullable: false),
-                    BeforePriceLabel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AfterPriceLabel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CenterCooling = table.Column<bool>(type: "bit", nullable: false),
-                    Balcony = table.Column<bool>(type: "bit", nullable: false),
-                    PetFriendly = table.Column<bool>(type: "bit", nullable: false),
-                    Barbeque = table.Column<bool>(type: "bit", nullable: false),
-                    FireAlarm = table.Column<bool>(type: "bit", nullable: false),
-                    ModernKitchen = table.Column<bool>(type: "bit", nullable: false),
-                    Storage = table.Column<bool>(type: "bit", nullable: false),
-                    Dryer = table.Column<bool>(type: "bit", nullable: false),
-                    Heating = table.Column<bool>(type: "bit", nullable: false),
-                    Pool = table.Column<bool>(type: "bit", nullable: false),
-                    Laundry = table.Column<bool>(type: "bit", nullable: false),
-                    Sauna = table.Column<bool>(type: "bit", nullable: false),
-                    Gym = table.Column<bool>(type: "bit", nullable: false),
-                    Elevator = table.Column<bool>(type: "bit", nullable: false),
-                    DishWasher = table.Column<bool>(type: "bit", nullable: false),
-                    EmergencyExit = table.Column<bool>(type: "bit", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Neighborhood = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bedrooms = table.Column<int>(type: "int", nullable: true),
+                    Bathrooms = table.Column<int>(type: "int", nullable: true),
+                    Floors = table.Column<int>(type: "int", nullable: true),
+                    Garages = table.Column<int>(type: "int", nullable: true),
+                    Area = table.Column<int>(type: "int", nullable: true),
+                    Size = table.Column<int>(type: "int", nullable: true),
+                    SaleOrRentPrice = table.Column<double>(type: "float", nullable: true),
+                    BeforePriceLabel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AfterPriceLabel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CenterCooling = table.Column<bool>(type: "bit", nullable: true),
+                    Balcony = table.Column<bool>(type: "bit", nullable: true),
+                    PetFriendly = table.Column<bool>(type: "bit", nullable: true),
+                    Barbeque = table.Column<bool>(type: "bit", nullable: true),
+                    FireAlarm = table.Column<bool>(type: "bit", nullable: true),
+                    ModernKitchen = table.Column<bool>(type: "bit", nullable: true),
+                    Storage = table.Column<bool>(type: "bit", nullable: true),
+                    Dryer = table.Column<bool>(type: "bit", nullable: true),
+                    Heating = table.Column<bool>(type: "bit", nullable: true),
+                    Pool = table.Column<bool>(type: "bit", nullable: true),
+                    Laundry = table.Column<bool>(type: "bit", nullable: true),
+                    Sauna = table.Column<bool>(type: "bit", nullable: true),
+                    Gym = table.Column<bool>(type: "bit", nullable: true),
+                    Elevator = table.Column<bool>(type: "bit", nullable: true),
+                    DishWasher = table.Column<bool>(type: "bit", nullable: true),
+                    EmergencyExit = table.Column<bool>(type: "bit", nullable: true),
+                    PropertyId = table.Column<int>(type: "int", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Neighborhood = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: true),
@@ -279,24 +279,23 @@ namespace RealEstateCase.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductDetails", x => x.Id);
+                    table.PrimaryKey("PK_PropertyDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_PropertyDetails_Propertys_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Propertys",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductImages",
+                name: "PropertyImages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    ProductDetailsId = table.Column<int>(type: "int", nullable: true),
+                    PropertyId = table.Column<int>(type: "int", nullable: false),
+                    PropertyDetailsId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: true),
@@ -306,24 +305,24 @@ namespace RealEstateCase.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductImages", x => x.Id);
+                    table.PrimaryKey("PK_PropertyImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductImages_ProductDetails_ProductDetailsId",
-                        column: x => x.ProductDetailsId,
-                        principalTable: "ProductDetails",
+                        name: "FK_PropertyImages_PropertyDetails_PropertyDetailsId",
+                        column: x => x.PropertyDetailsId,
+                        principalTable: "PropertyDetails",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProductImages_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_PropertyImages_Propertys_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Propertys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_ProductId",
+                name: "IX_Favorites_PropertyId",
                 table: "Favorites",
-                column: "ProductId");
+                column: "PropertyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favorites_UserId",
@@ -331,34 +330,35 @@ namespace RealEstateCase.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_ProductId",
-                table: "ProductDetails",
-                column: "ProductId",
-                unique: true);
+                name: "IX_PropertyDetails_PropertyId",
+                table: "PropertyDetails",
+                column: "PropertyId",
+                unique: true,
+                filter: "[PropertyId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductImages_ProductDetailsId",
-                table: "ProductImages",
-                column: "ProductDetailsId");
+                name: "IX_PropertyImages_PropertyDetailsId",
+                table: "PropertyImages",
+                column: "PropertyDetailsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductImages_ProductId",
-                table: "ProductImages",
-                column: "ProductId");
+                name: "IX_PropertyImages_PropertyId",
+                table: "PropertyImages",
+                column: "PropertyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_AdvertisementStatusId",
-                table: "Products",
+                name: "IX_Propertys_AdvertisementStatusId",
+                table: "Propertys",
                 column: "AdvertisementStatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
+                name: "IX_Propertys_AdvertisementTypeId",
+                table: "Propertys",
+                column: "AdvertisementTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_UserId",
-                table: "Products",
+                name: "IX_Propertys_UserId",
+                table: "Propertys",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -379,7 +379,7 @@ namespace RealEstateCase.DataAccess.Migrations
                 name: "Favorites");
 
             migrationBuilder.DropTable(
-                name: "ProductImages");
+                name: "PropertyImages");
 
             migrationBuilder.DropTable(
                 name: "UserDetails");
@@ -388,13 +388,13 @@ namespace RealEstateCase.DataAccess.Migrations
                 name: "UserRole");
 
             migrationBuilder.DropTable(
-                name: "ProductDetails");
+                name: "PropertyDetails");
 
             migrationBuilder.DropTable(
                 name: "Role");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Propertys");
 
             migrationBuilder.DropTable(
                 name: "AdvertisementStatuses");

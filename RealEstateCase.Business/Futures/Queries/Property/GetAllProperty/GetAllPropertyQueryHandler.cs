@@ -20,11 +20,40 @@ namespace RealEstateCase.Business.Futures.Queries.Property.GetAllProperty
             _mapper = mapper;
         }
 
-        public async Task<BaseResponseModel<IEnumerable<GetAllPropertyQueryResponseModel>>> Handle(GetAllPropertyQueryRequestModel request, CancellationToken cancellationToken)
+        /*public async Task<BaseResponseModel<IEnumerable<GetAllPropertyQueryResponseModel>>> Handle(GetAllPropertyQueryRequestModel request, CancellationToken cancellationToken)
         {
             var data = await _unitOfWork.Repository<IPropertyRepository>().Query().Where(x=> x.AdvertisementStatusId == (int)request.Status).Include(x => x.PropertyDetails).ToListAsync(cancellationToken);
             var mappedData = _mapper.Map<List<GetAllPropertyQueryResponseModel>>(data);
             return ResponseManager.Ok(mappedData.AsEnumerable());
         }
+
+        public async Task<BaseResponseModel<IEnumerable<GetAllPropertyQueryResponseModel>>> Handle(GetAllPropertyQueryRequestModel request, CancellationToken cancellationToken)
+        {
+            var query = _unitOfWork.Repository<IPropertyRepository>().Query();
+
+            if (request.Status.HasValue)
+            {
+                query = query.Where(x => x.AdvertisementStatusId == (int)request.Status.Value);
+            }
+            var data = await query.Include(x => x.PropertyDetails).ToListAsync(cancellationToken);
+            var mappedData = _mapper.Map<List<GetAllPropertyQueryResponseModel>>(data);
+
+            return ResponseManager.Ok(mappedData.AsEnumerable());
+        }*/
+
+        public async Task<BaseResponseModel<IEnumerable<GetAllPropertyQueryResponseModel>>> Handle(GetAllPropertyQueryRequestModel request, CancellationToken cancellationToken)
+        {
+            var query = _unitOfWork.Repository<IPropertyRepository>().Query().Where(p => p.IsActive);
+            if (request.Status.HasValue)
+            {
+                query = query.Where(x => x.AdvertisementStatusId == (int)request.Status.Value);
+            }           
+            var data = await query.Include(x => x.PropertyDetails).ToListAsync(cancellationToken);
+            var mappedData = _mapper.Map<List<GetAllPropertyQueryResponseModel>>(data);
+
+            return ResponseManager.Ok(mappedData.AsEnumerable());
+        }
+
+
     }
 }

@@ -20,8 +20,10 @@ namespace RealEstateCase.Business
             service.AddScoped<CreateDataService>();
             var createDataService = service.BuildServiceProvider().GetService<CreateDataService>();
             createDataService.CreateAdvertisementStatus().GetAwaiter().GetResult();
-            createDataService.CreateCategories().GetAwaiter().GetResult();
+            createDataService.CreateAdvertisementType().GetAwaiter().GetResult();
+            //createDataService.CreateUsers().GetAwaiter().GetResult();
+            createDataService.CreateProperties().GetAwaiter().GetResult();
+            createDataService.CreatePropertyDetails().GetAwaiter().GetResult();
         }
-
     }
 }

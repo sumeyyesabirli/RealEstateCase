@@ -6,6 +6,6 @@ namespace RealEstateCase.Business.Futures.Queries.Property.GetAllProperty
 {
     public class GetAllPropertyQueryRequestModel : IRequest<BaseResponseModel<IEnumerable<GetAllPropertyQueryResponseModel>>>
     {
-        public AdvertisementStatusEnum Status { get; set; }
+        public AdvertisementStatusEnum? Status { get; set; }
     }
 }

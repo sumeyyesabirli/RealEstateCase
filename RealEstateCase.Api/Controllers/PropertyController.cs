@@ -31,7 +31,7 @@ namespace RealEstateCase.Api.Controllers
             return HandleResponse(await _mediator.Send(requestModel, cancellationToken));
         }
 
-        [HttpPut("api/Property/SetAdvertisementStatus")]
+        [HttpPut("SetAdvertisementStatus")]
         public async Task<IActionResult> ApproveProperty([FromBody] SetAdvertisementStatusCommandRequestModel requestModel, CancellationToken cancellationToken)
             => HandleResponse(await _mediator.Send(requestModel, cancellationToken));
 

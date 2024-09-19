@@ -9,9 +9,10 @@ namespace RealEstateCase.Business.Futures.Queries.Property.GetAllProperty
         public string Description { get; set; }
         public double PropertyPrice { get; set; }
         public int AdvertisementTypeId { get; set; }
+        public int AdvertisementStatusId { get; set; }
         public int UserId { get; set; }
 
-        public PropertyDetailsQueryResponseModel PropertyDetails { get; set; }
+        public PropertyDetailsQueryResponseModel? PropertyDetails { get; set; }
     }
 
     public class PropertyDetailsQueryResponseModel

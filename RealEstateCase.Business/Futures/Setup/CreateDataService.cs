@@ -2,11 +2,6 @@
 using RealEstateCase.DataAccess.Repositories.Abstract;
 using RealEstateCase.DataAccess.UnitOfWork.Abstract;
 using RealEstateCase.Entity.Main;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateCase.Business.Futures.Setup
 {
@@ -55,7 +50,7 @@ namespace RealEstateCase.Business.Futures.Setup
             }
 
         }
-        public async Task CreateCategories()
+        public async Task CreateAdvertisementType()
         {
             var hasData = await _unitOfWork.Repository<IAdvertisementTypeRepository>().Query().ToListAsync();
             if (!hasData.Any())
@@ -76,6 +71,132 @@ namespace RealEstateCase.Business.Futures.Setup
                     _unitOfWork.Repository<IAdvertisementTypeRepository>().Add(advertisentment);
                     await _unitOfWork.SaveChangesAsync(CancellationToken.None);
 
+                }
+                _unitOfWork.Commit();
+            }
+        }
+
+        /*public async Task CreateUsers()
+        {
+            var hasData = await _unitOfWork.Repository<IUserRepository>().Query().ToListAsync();
+            if (!hasData.Any())
+            {
+                var users = new List<User>();
+                users.Add(new User
+                {
+                    Username = "admin",
+                    Email = "admin@example.com",
+                    PasswordHash = "hash1",
+                    PasswordSalt = "salt1",
+                    CreatedById = 1,
+                    UpdatedById = 1,
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow,
+                    IsActive = true,
+                }) ;
+                users.Add(new User
+                {
+                    Username = "user1",
+                    Email = "user1@example.com",
+                    PasswordHash = "hash2",
+                    PasswordSalt = "salt2",
+                    CreatedById = 1,
+                    UpdatedById = 1,
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow,
+                    IsActive = true,
+                });
+
+                _unitOfWork.OpenTransaction();
+                try
+                {
+                    foreach (var user in users)
+                    {
+                        _unitOfWork.Repository<IUserRepository>().Add(user);
+                    }
+
+                    // Save changes once after adding all users
+                    await _unitOfWork.SaveChangesAsync(CancellationToken.None);
+                    _unitOfWork.Commit();
+                }
+                catch (Exception)
+                {
+                    _unitOfWork.Rollback();
+                    throw;
+                }
+            }
+        }*/
+        public async Task CreateProperties()
+        {
+            var hasData = await _unitOfWork.Repository<IPropertyRepository>().Query().ToListAsync();
+            if (!hasData.Any())
+            {
+                var properties = new List<Property>();
+                properties.Add(new Property
+                {
+                    Title = "Luxury Villa",
+                    Description = "Beautiful villa with sea view",
+                    PropertyPrice = 1200000,
+                    UserId = 9,
+                    AdvertisementTypeId = 1,
+                    AdvertisementStatusId = 1
+                });
+                properties.Add(new Property
+                {
+                    Title = "Cozy Apartment",
+                    Description = "Modern apartment in the city center",
+                    PropertyPrice = 500000,
+                    UserId = 9,
+                    AdvertisementTypeId = 2,
+                    AdvertisementStatusId = 2
+                });
+
+                _unitOfWork.OpenTransaction();
+                foreach (var property in properties)
+                {
+                    _unitOfWork.Repository<IPropertyRepository>().Add(property);
+                    await _unitOfWork.SaveChangesAsync(CancellationToken.None);
+                }
+                _unitOfWork.Commit();
+            }
+        }
+        public async Task CreatePropertyDetails()
+        {
+            var hasData = await _unitOfWork.Repository<IPropertyDetailsRepository>().Query().ToListAsync();
+            if (!hasData.Any())
+            {
+                var propertyDetails = new List<PropertyDetails>();
+                propertyDetails.Add(new PropertyDetails
+                {
+                    Title = "Luxury Villa",
+                    Description = "Beautiful villa with sea view",
+                    Bedrooms = 4,
+                    Bathrooms = 3,
+                    SaleOrRentPrice = 1200000,
+                    Location = "Istanbul",
+                    Country = "Turkey",
+                    City = "Istanbul",
+                    State = "Marmara",
+                    ZipCode = "34000"
+                });
+                propertyDetails.Add(new PropertyDetails
+                {
+                    Title = "Cozy Apartment",
+                    Description = "Modern apartment in the city center",
+                    Bedrooms = 2,
+                    Bathrooms = 1,
+                    SaleOrRentPrice = 500000,
+                    Location = "Ankara",
+                    Country = "Turkey",
+                    City = "Ankara",
+                    State = "Anatolia",
+                    ZipCode = "06000"
+                });
+                _unitOfWork.OpenTransaction();
+                foreach (var propertyDetail in propertyDetails)
+                {
+                    _unitOfWork.Repository<IPropertyDetailsRepository>().Add(propertyDetail);
+                    await _unitOfWork.SaveChangesAsync(CancellationToken.None);
                 }
                 _unitOfWork.Commit();
             }

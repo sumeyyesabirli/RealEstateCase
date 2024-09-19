@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.Extensions.Logging;
 using RealEstateCase.Core.ResponseManager;
 using RealEstateCase.DataAccess.Repositories.Abstract;

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using RealEstateCase.Business.Futures.Commands.Product.AddProduct;
+using RealEstateCase.Business.Futures.Commands.Property.AddProperty;
 using RealEstateCase.Business.Futures.Setup;
 using System.Reflection;
 

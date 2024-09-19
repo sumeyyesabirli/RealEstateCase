@@ -57,23 +57,23 @@ namespace RealEstateCase.Business.Futures.Setup
         }
         public async Task CreateCategories()
         {
-            var hasData = await _unitOfWork.Repository<ICategoryRepository>().Query().ToListAsync();
+            var hasData = await _unitOfWork.Repository<IAdvertisementTypeRepository>().Query().ToListAsync();
             if (!hasData.Any())
             {
-                var advertisentments = new List<Category>();
-                advertisentments.Add(new Category
+                var advertisentments = new List<AdvertisementType>();
+                advertisentments.Add(new AdvertisementType
                 {
-                    CategoryName = "Satılık"
+                    AdvertisementTypeName = "Satılık"
                 });
-                advertisentments.Add(new Category
+                advertisentments.Add(new AdvertisementType
                 {
-                    CategoryName = "Kiralık"
+                    AdvertisementTypeName = "Kiralık"
                 });
                
                 _unitOfWork.OpenTransaction();
                 foreach (var advertisentment in advertisentments)
                 {
-                    _unitOfWork.Repository<ICategoryRepository>().Add(advertisentment);
+                    _unitOfWork.Repository<IAdvertisementTypeRepository>().Add(advertisentment);
                     await _unitOfWork.SaveChangesAsync(CancellationToken.None);
 
                 }

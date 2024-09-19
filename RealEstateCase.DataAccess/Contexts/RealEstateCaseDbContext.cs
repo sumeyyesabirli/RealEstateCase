@@ -18,14 +18,14 @@ namespace RealEstateCase.DataAccess.Contexts
             Database.Migrate();
         }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<AdvertisementType> Categories { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductDetails> ProductDetails { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Property> Propertys { get; set; }
+        public DbSet<PropertyDetails> PropertyDetails { get; set; }
+        public DbSet<PropertyImage> PropertyImages { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<AdvertisementStatus> AdvertisementStatuses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,9 +38,9 @@ namespace RealEstateCase.DataAccess.Contexts
                 .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Favorite>()
-                .HasOne(f => f.Product)
+                .HasOne(f => f.Property)
                 .WithMany(p => p.Favorites)
-                .HasForeignKey(f => f.ProductId)
+                .HasForeignKey(f => f.PropertyId)
                 .OnDelete(DeleteBehavior.Cascade);
           
             modelBuilder.Entity<UserRole>().HasKey(p => new { p.UserId, p.RoleId, p.Id });

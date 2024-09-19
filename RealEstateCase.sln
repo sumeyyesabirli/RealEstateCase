@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateCase.Entity", "Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateCase.Api", "RealEstateCase.Api\RealEstateCase.Api.csproj", "{6A3A876E-13DF-43E7-ADEE-D854A5FFE24C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateCase.UI", "..\..\..\Downloads\RealEstateCase.UI\RealEstateCase.UI\RealEstateCase.UI\RealEstateCase.UI.csproj", "{9D9DB74A-9D04-4AC0-A94D-583A99CB1DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateCase.UI", "RealEstateCase.UI\RealEstateCase.UI\RealEstateCase.UI.csproj", "{B3502019-98BD-41F3-ADF0-1321EB4AF0C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{6A3A876E-13DF-43E7-ADEE-D854A5FFE24C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A3A876E-13DF-43E7-ADEE-D854A5FFE24C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A3A876E-13DF-43E7-ADEE-D854A5FFE24C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D9DB74A-9D04-4AC0-A94D-583A99CB1DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D9DB74A-9D04-4AC0-A94D-583A99CB1DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D9DB74A-9D04-4AC0-A94D-583A99CB1DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D9DB74A-9D04-4AC0-A94D-583A99CB1DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3502019-98BD-41F3-ADF0-1321EB4AF0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3502019-98BD-41F3-ADF0-1321EB4AF0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3502019-98BD-41F3-ADF0-1321EB4AF0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3502019-98BD-41F3-ADF0-1321EB4AF0C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

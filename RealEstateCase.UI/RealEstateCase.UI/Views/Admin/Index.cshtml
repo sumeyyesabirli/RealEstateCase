@@ -1,0 +1,74 @@
+﻿@model IEnumerable<PropertyViewModel>
+
+@{
+    ViewBag.Title = "Property List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <h4 class="page-title mb-2"><i class="mdi mdi-format-list-checkbox mr-2"></i>Property List</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mt-0 header-title">Available Properties</h4>
+                    <table class="table table-bordered dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>Başlık</th>
+                                <th>Fiyatı</th>
+                                <th>Açıklaması</th>
+                                <th>Kategorisi</th>
+                                <th>Kullanıcı</th>
+                                <th>İşlem Durumu</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var property in Model)
+                                {
+                                    <tr>
+                                        <td>@property.Title</td>
+                                        <td>@property.PropertyPrice</td>
+                                        <td>@property.Description</td>
+                                        <td>@property.AdvertisementTypeId</td>
+                                        <td>@property.UserId</td>
+                                        <td>@property.AdvertisementStatusId</td>
+
+                                        <td>
+                                            <form action="@Url.Action("SetAdvertisementStatus", "Admin")" method="post" style="display:inline;">
+                                                <input type="hidden" name="PropertyId" value="@property.Id" />
+                                                <button type="submit" name="status" value="1" class="btn btn-sm btn-outline-secondary">Pending</button>
+                                                <button type="submit" name="status" value="2" class="btn btn-sm btn-outline-success">Approve</button>
+                                                <button type="submit" name="status" value="3" class="btn btn-sm btn-outline-warning">Cancelled</button>
+                                                <button type="submit" name="status" value="4" class="btn btn-sm btn-outline-danger">Remove</button>
+                                            </form>
+                                            <form action="@Url.Action("DeleteProperty", "Admin")" method="post" style="display:inline;">
+                                                <input type="hidden" name="PropertyId" value="@property.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('İlanı silmek istediğinizden emin misiniz?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6">No properties found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

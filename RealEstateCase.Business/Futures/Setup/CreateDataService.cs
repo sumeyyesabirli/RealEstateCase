@@ -137,7 +137,7 @@ namespace RealEstateCase.Business.Futures.Setup
                     Title = "Luxury Villa",
                     Description = "Beautiful villa with sea view",
                     PropertyPrice = 1200000,
-                    UserId = 9,
+                    UserId = 1,
                     AdvertisementTypeId = 1,
                     AdvertisementStatusId = 1
                 });
@@ -146,7 +146,7 @@ namespace RealEstateCase.Business.Futures.Setup
                     Title = "Cozy Apartment",
                     Description = "Modern apartment in the city center",
                     PropertyPrice = 500000,
-                    UserId = 9,
+                    UserId = 1,
                     AdvertisementTypeId = 2,
                     AdvertisementStatusId = 2
                 });

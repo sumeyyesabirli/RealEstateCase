@@ -1,4 +1,6 @@
-﻿<!-- properties-grid
+﻿@model IEnumerable<PropertyViewModel>
+
+<!-- properties-grid
 ============================================= -->
 <section id="properties-grid">
     <div class="container">
@@ -12,6 +14,8 @@
                     </div>
                     <div class="widget--content">
                         <ul class="list-unstyled mb-0">
+                            <ul class="list-unstyled mb-0">
+                            </ul>
                             <li>
                                 <a href="#">Apartments <span>(13)</span></a>
                             </li>
@@ -57,18 +61,21 @@
                     </div>
                     <div class="widget--content">
                         <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#">London <span>(5)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Sydney <span>(10)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">New York <span>(4)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Paris <span>(7)</span></a>
-                            </li>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var city in Model)
+                                {
+                                    <li>
+                                        <a href="#">@city.PropertyDetails.City</a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6">Yok</td>
+                                </tr>
+                            }
                         </ul>
                     </div>
                 </div>

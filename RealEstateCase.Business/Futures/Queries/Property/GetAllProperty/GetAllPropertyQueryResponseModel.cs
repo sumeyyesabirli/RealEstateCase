@@ -11,6 +11,7 @@ namespace RealEstateCase.Business.Futures.Queries.Property.GetAllProperty
         public int AdvertisementTypeId { get; set; }
         public int AdvertisementStatusId { get; set; }
         public int UserId { get; set; }
+        public bool? IsActive { get; set; }
 
         public PropertyDetailsQueryResponseModel? PropertyDetails { get; set; }
     }

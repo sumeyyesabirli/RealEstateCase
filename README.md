@@ -28,31 +28,23 @@ Kullanılan Design Pattern'ler
     CQRS Pattern: Veri okuma ve yazma işlemlerinin ayrılması için kullanılmıştır.
     Mediator Pattern (MediatR): Komutlar ve sorgular arasındaki etkileşimi yöneterek, kodun daha düzenli ve genişletilebilir olmasını sağlar.
 
-Kurulum
+Kurulum     
 
-    Depoyu klonlayın:
+Depoyu klonlayın:
 
-    bash
-
-git clone https://github.com/sumeyyesabirli/RealEstateCase.git
+    git clone https://github.com/sumeyyesabirli/RealEstateCase.git 
 
 Proje dizinine gidin ve bağımlılıkları yükleyin:
-
-bash
-
-cd RealEstateCase
-dotnet restore
+    
+    cd RealEstateCase
+    dotnet restore
 
 Veritabanı güncellemelerini uygulayın:
-
-bash
-
-dotnet ef database update
-update-database
+    
+    dotnet ef database update
+    update-database
 
 Uygulamayı çalıştırın:
-
-bash
 
     dotnet run
 

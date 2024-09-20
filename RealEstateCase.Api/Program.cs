@@ -1,5 +1,9 @@
 using RealEstateCase.DataAccess;
 using RealEstateCase.Business;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using RealEstateCase.Core.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +19,7 @@ builder.Services.DataAccessRegistration(builder.Configuration);
 builder.Services.BusinessRegister();
 builder.Services.AddHttpContextAccessor();
 
-// Configure CORS (Doðru yerde)
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -25,9 +29,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
-
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -41,6 +43,7 @@ app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

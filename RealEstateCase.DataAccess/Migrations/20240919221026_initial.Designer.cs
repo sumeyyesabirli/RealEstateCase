@@ -12,8 +12,8 @@ using RealEstateCase.DataAccess.Contexts;
 namespace RealEstateCase.DataAccess.Migrations
 {
     [DbContext(typeof(RealEstateCaseDbContext))]
-    [Migration("20240919083003_first")]
-    partial class first
+    [Migration("20240919221026_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,36 +205,30 @@ namespace RealEstateCase.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AfterPriceLabel")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Area")
+                        .HasColumnType("float");
 
-                    b.Property<int?>("Area")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("Balcony")
+                    b.Property<bool>("Balcony")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("Barbeque")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("Bathrooms")
+                    b.Property<int>("Bathrooms")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Bedrooms")
+                    b.Property<int>("Bedrooms")
                         .HasColumnType("int");
 
-                    b.Property<string>("BeforePriceLabel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("CenterCooling")
+                    b.Property<bool>("CenterCooling")
                         .HasColumnType("bit");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CreatedById")
@@ -244,34 +238,14 @@ namespace RealEstateCase.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("DishWasher")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("Dryer")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("Elevator")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("EmergencyExit")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("FireAlarm")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("Floors")
+                    b.Property<int>("Floors")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Garages")
+                    b.Property<int>("Garages")
                         .HasColumnType("int");
-
-                    b.Property<bool?>("Gym")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("Heating")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -279,49 +253,37 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("Laundry")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("ModernKitchen")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Neighborhood")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("PetFriendly")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("Pool")
+                    b.Property<bool>("PetFriendly")
                         .HasColumnType("bit");
 
                     b.Property<int?>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("SaleOrRentPrice")
+                    b.Property<double>("Size")
                         .HasColumnType("float");
 
-                    b.Property<bool?>("Sauna")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("Size")
-                        .HasColumnType("int");
-
                     b.Property<string>("State")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Storage")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UpdatedById")
@@ -330,7 +292,8 @@ namespace RealEstateCase.DataAccess.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ZipCode")
+                    b.Property<string>("ZipPostalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

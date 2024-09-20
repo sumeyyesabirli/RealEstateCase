@@ -1,0 +1,120 @@
+﻿<form action="/Property/AddProperty" method="post">
+    <div class="form-box">
+        <!-- Property Description -->
+        <div class="form-group">
+            <label for="property-title">Property Title*</label>
+            <input type="text" class="form-control" name="Title" id="property-title" required>
+        </div>
+        <div class="form-group">
+            <label for="property-description">Property Description*</label>
+            <textarea class="form-control" name="Description" id="property-description" rows="2" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="property-price">Property Price*</label>
+            <input type="number" class="form-control" name="PropertyPrice" id="property-price" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="advertisement-type">Advertisement Type*</label>
+            <select class="form-control" name="AdvertisementTypeId" id="advertisement-type" required>
+                <option value="1">For Sale</option>
+                <option value="2">For Rent</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="advertisement-status">Advertisement Status*</label>
+            <select class="form-control" name="AdvertisementStatusId" id="advertisement-status" required>
+                <option value="1">Active</option>
+                <option value="2">Inactive</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-box">
+        <div class="form-group">
+            <label for="select-type">Type*</label>
+            <select id="select-type" class="form-control" name="PropertyDetails.Type" required>
+                <option value="house">House</option>
+                <option value="apartment">Apartment</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="select-status">Status*</label>
+            <select id="select-status" class="form-control" name="PropertyDetails.Status" required>
+                <option value="sale">Sale</option>
+                <option value="rent">Rent</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="location">Location*</label>
+            <input type="text" class="form-control" name="PropertyDetails.Location" id="location" required>
+        </div>
+        <div class="form-group">
+            <label for="Bedrooms">Bedrooms</label>
+            <input type="number" class="form-control" name="PropertyDetails.Bedrooms" id="Bedrooms" min="0">
+        </div>
+        <div class="form-group">
+            <label for="Bathrooms">Bathrooms</label>
+            <input type="number" class="form-control" name="PropertyDetails.Bathrooms" id="Bathrooms" min="0">
+        </div>
+        <div class="form-group">
+            <label for="Floors">Floors</label>
+            <input type="number" class="form-control" name="PropertyDetails.Floors" id="Floors" min="0">
+        </div>
+        <div class="form-group">
+            <label for="Garages">Garages</label>
+            <input type="number" class="form-control" name="PropertyDetails.Garages" id="Garages" min="0">
+        </div>
+        <div class="form-group">
+            <label for="Area">Area (sq ft)</label>
+            <input type="number" class="form-control" name="PropertyDetails.Area" id="Area" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="Size">Size (sq ft)</label>
+            <input type="number" class="form-control" name="PropertyDetails.Size" id="Size" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="center-cooling">Center Cooling</label>
+            <input type="checkbox" name="PropertyDetails.CenterCooling" id="center-cooling" value="true">
+        </div>
+        <div class="form-group">
+            <label for="balcony">Balcony</label>
+            <input type="checkbox" name="PropertyDetails.Balcony" id="balcony" value="true">
+        </div>
+        <div class="form-group">
+            <label for="pet-friendly">Pet Friendly</label>
+            <input type="checkbox" name="PropertyDetails.PetFriendly" id="pet-friendly" value="true">
+        </div>
+    </div>
+
+    <!-- Address and Location -->
+    <div class="form-box">
+        <div class="form-group">
+            <label for="address">Address*</label>
+            <input type="text" class="form-control" name="PropertyDetails.Address" id="address" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country*</label>
+            <input type="text" class="form-control" name="PropertyDetails.Country" id="country" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City*</label>
+            <input type="text" class="form-control" name="PropertyDetails.City" id="city" required>
+        </div>
+        <div class="form-group">
+            <label for="state">State*</label>
+            <input type="text" class="form-control" name="PropertyDetails.State" id="state" required>
+        </div>
+        <div class="form-group">
+            <label for="Zip/Postal-code">Zip/Postal Code*</label>
+            <input type="text" class="form-control" name="PropertyDetails.ZipPostalCode" id="Zip/Postal-code" required>
+        </div>
+        <div class="form-group">
+            <label for="neighborhood">Neighborhood</label>
+            <input type="text" class="form-control" name="PropertyDetails.Neighborhood" id="neighborhood">
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+</form>

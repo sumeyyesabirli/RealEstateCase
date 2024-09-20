@@ -6,11 +6,11 @@ using static System.Net.WebRequestMethods;
 
 namespace RealEstateCase.UI.Controllers
 {
-    public class PropertiesController : Controller
+    public class AdvertisementController : Controller
     {
         private readonly HttpClient _httpClient;
 
-        public PropertiesController(HttpClient httpClient)
+        public AdvertisementController(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -41,23 +41,5 @@ namespace RealEstateCase.UI.Controllers
             }
             return View("Error");
         }
-
-        /*public async Task<IActionResult> GetProperty()
-        {
-            var response = await _httpClient.GetAsync($"https://localhost:7063/api/Property");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var apiResponse = JsonConvert.DeserializeObject<ApiResponseModel<IEnumerable<PropertyViewModel>>>(jsonString);
-
-                if (apiResponse != null && apiResponse.Success)
-                {
-                    var activeProperties = apiResponse.Data.Where(p => p.IsActive == true);
-                    return View(apiResponse.Data);
-                }
-            }
-            return View("Error");
-        }*/
     }
 }

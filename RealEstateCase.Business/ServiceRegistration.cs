@@ -22,8 +22,7 @@ namespace RealEstateCase.Business
             createDataService.CreateAdvertisementStatus().GetAwaiter().GetResult();
             createDataService.CreateAdvertisementType().GetAwaiter().GetResult();
             //createDataService.CreateUsers().GetAwaiter().GetResult();
-            createDataService.CreateProperties().GetAwaiter().GetResult();
-            createDataService.CreatePropertyDetails().GetAwaiter().GetResult();
+            createDataService.CreatePropertyAndDetails().GetAwaiter().GetResult();
         }
     }
 }
